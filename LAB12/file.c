@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -87,8 +89,7 @@ void addLooggs(char* user_answer,char *user_name)
 	if (str_log != NULL)
 	{
 		time_t mytime = time(NULL);
-		struct tm* now = NULL;
-		localtime_s(now,&mytime);
+		struct tm* now = localtime(&mytime);
 		char str[15];
 		strftime(str, sizeof(str), "%x", now);
 
@@ -107,7 +108,7 @@ void addLooggs(char* user_answer,char *user_name)
 		strcat_s(str_log, KB, user_name);
 		char answer[] = " says:";
 		strcat_s(str_log, KB, answer);
-		strcat_s(str_log, KB, user_answer);
+		strcat_s(str_log,KB, user_answer);
 
 		fputs(str_log, loggs);
 
