@@ -9,7 +9,7 @@ typedef struct TREE {
 
 void checkUserAnswer(char* symbol);
 
-void checkForRightAnswer(FILE* data_base, char* answer,char *user_name);
+void checkForRightAnswer(FILE* data_base, char* answer,const char *user_name);
 
 void prepareAnswersForQuestion(char** program_answer, char** right_answer);
 

@@ -55,17 +55,17 @@ void getAnswer(tree* head,FILE* data_base,char *user_name)
 
 	addLooggs(user_answer_str,user_name);
 
-	if (user_answer == 'N')
+	if (user_answer == 'N' && head->left != NULL)
 	{
 		getAnswer(head->left,data_base, user_name);
 	}
-	else if(user_answer=='Y')
+	else if(user_answer=='Y' && head->right!=NULL)
 	{
 		getAnswer(head->right,data_base, user_name);
 	}
 }
 
-void checkForRightAnswer(FILE * data_base,char *answer,char *user_name)
+void checkForRightAnswer(FILE * data_base,char *answer,const char *user_name)
 {
 	char user_answer='\0';
 
@@ -92,6 +92,13 @@ void checkForRightAnswer(FILE * data_base,char *answer,char *user_name)
 
 			addLooggs(right_answer,user_name);
 		}
+		if (right_answer == NULL)
+		{
+			free(answer);
+			free(user_name);
+
+			exit(MEMORY_MISTAKE);
+		}
 
 		char* difference = (char*)calloc(KB, sizeof(char));
 		if (difference != NULL)
@@ -105,10 +112,12 @@ void checkForRightAnswer(FILE * data_base,char *answer,char *user_name)
 		if (difference == NULL)
 		{
 			free(answer);
-			free(user_answer);
+			free(user_name);
+			free(right_answer);
 
 			exit(MEMORY_MISTAKE);
 		}
+
 		prepareDifferenceForNewBase(&difference);
 		prepareAnswerForNewBase(&right_answer);
 		prepareAnswerForNewBase(&answer);
