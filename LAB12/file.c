@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<time.h>
+#include < time.h >
 
 #include"file.h"
 #include"tree.h"
@@ -38,7 +38,6 @@ tree* loadInfoFromFile(FILE* file,tree* head)
 	head = (tree*)calloc(1, sizeof(tree));
 	if (head == NULL)
 	{
-		return NULL;
 		exit(MEMORY_MISTAKE);
 	}
 
@@ -74,7 +73,7 @@ void delateOldBase()
 	}
 }
 
-void addLooggs(char* user_answer,char *user_name)
+void addLooggs(const char* user_answer,const char *user_name)
 {
 	FILE* loggs;
 	errno_t err_file = fopen_s(&loggs, "Loggs.txt", "a+");
@@ -89,7 +88,25 @@ void addLooggs(char* user_answer,char *user_name)
 	if (str_log != NULL)
 	{
 		time_t mytime = time(NULL);
-		struct tm* now = localtime(&mytime);
+		struct tm* now=(struct tm*)calloc(1,sizeof(struct tm));
+		if (now == NULL)
+		{
+			free(user_answer);
+			free(user_name);
+			free(str_log);
+
+			exit(MEMORY_MISTAKE);
+		}
+		errno_t err = localtime_s(now, &mytime);
+		if (err != 0)
+		{
+			free(user_answer);
+			free(user_name);
+			free(str_log);
+			free(now);
+
+			exit(err);
+		}
 		char str[15];
 		strftime(str, sizeof(str), "%x", now);
 

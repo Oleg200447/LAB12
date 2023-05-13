@@ -30,7 +30,7 @@ void checkUserAnswer(char* symbol)
 
 void getAnswer(tree* head,FILE* data_base,char *user_name)
 {
-	if (head->right == NULL || head->left==NULL)
+	if (head->right == NULL && head->left==NULL)
 	{
 		printf("Answer:%s", head->data);
 
@@ -102,6 +102,13 @@ void checkForRightAnswer(FILE * data_base,char *answer,char *user_name)
 
 			addLooggs(difference,user_name);
 		}
+		if (difference == NULL)
+		{
+			free(answer);
+			free(user_answer);
+
+			exit(MEMORY_MISTAKE);
+		}
 		prepareDifferenceForNewBase(&difference);
 		prepareAnswerForNewBase(&right_answer);
 		prepareAnswerForNewBase(&answer);
@@ -164,7 +171,7 @@ void prepareAnswerForNewBase(char** answer)
 	*(*answer + i) = '\0';
 }
 
-void makeNewDataBase(FILE* data_base,char *difference,char * right_answer,char* answer)
+void makeNewDataBase(FILE* data_base,const char *difference,const char * right_answer,const char* answer)
 {
 	FILE* new_data_base;
 	errno_t err_file = fopen_s(&new_data_base, "Answers2.txt", "w+");

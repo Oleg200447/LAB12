@@ -8,4 +8,4 @@ tree* loadInfoFromFile(FILE* file, tree* head);
 
 void delateOldBase();
 
-void addLooggs(char* user_answer,char* user_name);
+void addLooggs(const char* user_answer,const char* user_name);
