@@ -87,7 +87,8 @@ void addLooggs(char* user_answer,char *user_name)
 	if (str_log != NULL)
 	{
 		time_t mytime = time(NULL);
-		struct tm* now = localtime(&mytime);
+		struct tm* now = NULL;
+		localtime_s(now,&mytime);
 		char str[15];
 		strftime(str, sizeof(str), "%x", now);
 
