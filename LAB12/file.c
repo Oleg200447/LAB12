@@ -92,21 +92,21 @@ void addLooggs(char* user_answer,char *user_name)
 		strftime(str, sizeof(str), "%x", now);
 
 		char data[] = "Data:";
-		strcat(str_log, data);
-		strcat(str_log, str);
-		strcat(str_log, SPACE);
+		strcat_s(str_log,KB, data);
+		strcat_s(str_log, KB, str);
+		strcat_s(str_log, KB, SPACE);
 
 		strftime(str, sizeof(str), "%X", now);
 
 		char time[] = "Time:";
-		strcat(str_log, time);
-		strcat(str_log, str);
-		strcat(str_log, SPACE);
+		strcat_s(str_log, KB, time);
+		strcat_s(str_log, KB, str);
+		strcat_s(str_log, KB, SPACE);
 
-		strcat(str_log, user_name);
+		strcat_s(str_log, KB, user_name);
 		char answer[] = " says:";
-		strcat(str_log, answer);
-		strcat(str_log, user_answer);
+		strcat_s(str_log, KB, answer);
+		strcat_s(str_log, KB, user_answer);
 
 		fputs(str_log, loggs);
 
