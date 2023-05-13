@@ -130,6 +130,7 @@ void addLooggs(const char* user_answer,const char *user_name)
 		fputs(str_log, loggs);
 
 		free(str_log);
+		free(now);
 
 		fclose(loggs);
 	}
